@@ -1,8 +1,6 @@
 import boto3
 import botocore.exceptions
 import logging
-import json
-import sqlite3
 import configparser
 import os
 import pandas as pd
