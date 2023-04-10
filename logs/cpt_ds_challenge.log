@@ -1,0 +1,271 @@
+2023-04-10 08:51:40 INFO Found credentials in environment variables.
+2023-04-10 08:51:40 INFO Extract H3 resolution 8 data from s3 bucket : cct-ds-code-challenge-input-data and filename : city-hex-polygons-8-10.geojson
+2023-04-10 08:51:42 INFO Execution of get_city_geojson took 2.31 seconds.
+2023-04-10 08:51:42 INFO Found credentials in environment variables.
+2023-04-10 08:51:42 INFO Found credentials in environment variables.
+2023-04-10 08:51:44 INFO H3 resolution 8 data from s3 :              index  centroid_lat  centroid_lon  resolution                                           geometry
+0  88ad361801fffff    -33.859427     18.677843           8  POLYGON ((18.68119 -33.86330, 18.68357 -33.859...
+1  88ad361803fffff    -33.855696     18.668766           8  POLYGON ((18.67211 -33.85957, 18.67450 -33.855...
+2  88ad361805fffff    -33.855263     18.685959           8  POLYGON ((18.68931 -33.85914, 18.69169 -33.855...
+3  88ad361807fffff    -33.851532     18.676881           8  POLYGON ((18.68023 -33.85541, 18.68261 -33.851...
+4  88ad361809fffff    -33.867322     18.678806           8  POLYGON ((18.68215 -33.87120, 18.68454 -33.867...
+2023-04-10 08:51:45 INFO Execution of get_city_geojson took 0.40 seconds.
+2023-04-10 08:51:45 INFO Found credentials in environment variables.
+2023-04-10 08:51:46 INFO Validation data from S3 :              index  centroid_lat  centroid_lon                                           geometry
+0  88ad361801fffff    -33.859427     18.677843  POLYGON ((18.68119 -33.86330, 18.68357 -33.859...
+1  88ad361803fffff    -33.855696     18.668766  POLYGON ((18.67211 -33.85957, 18.67450 -33.855...
+2  88ad361805fffff    -33.855263     18.685959  POLYGON ((18.68931 -33.85914, 18.69169 -33.855...
+3  88ad361807fffff    -33.851532     18.676881  POLYGON ((18.68023 -33.85541, 18.68261 -33.851...
+4  88ad361809fffff    -33.867322     18.678806  POLYGON ((18.68215 -33.87120, 18.68454 -33.867...
+2023-04-10 08:51:46 INFO Data validation  for city polygons data PASSED. Extracted data == Validation data :  validation test : True
+2023-04-10 08:51:46 INFO Execution of validate_data_extract took 0.03 seconds.
+2023-04-10 08:51:55 INFO Execution of get_sr_data took 8.63 seconds.
+2023-04-10 08:52:13 INFO Failed to join 212367 of the sr data to H3 resolution level 8 hexagon data. This is a join error of 22.55%
+2023-04-10 08:52:13 INFO Execution of join_sr_to_gpd_data_extract took 18.43 seconds.
+2023-04-10 08:52:14 INFO Joined SR data with city polygons :    reference_number         creation_timestamp       completion_timestamp     directorate                       department  ...                    geometry index_right            index centroid_lat centroid_lon
+0      9.109492e+09  2020-10-07 06:55:18+02:00  2020-10-08 15:36:35+02:00  URBAN MOBILITY  Roads Infrastructure Management  ...  POINT (18.52249 -33.87284)      1047.0  88ad360225fffff   -33.871121    18.524125
+1      9.108995e+09  2020-07-09 16:08:13+02:00  2020-07-14 14:27:01+02:00  URBAN MOBILITY  Roads Infrastructure Management  ...  POINT (18.84894 -34.07892)      3055.0  88ad36d5e1fffff   -34.080426    18.851688
+2      9.109614e+09  2020-10-27 10:21:59+02:00  2020-10-28 17:48:15+02:00  URBAN MOBILITY  Roads Infrastructure Management  ...  POINT (18.82112 -34.10224)      2946.0  88ad36d437fffff   -34.104934    18.820143
+3      9.108601e+09  2020-03-19 06:36:06+02:00  2021-03-29 20:34:19+02:00  URBAN MOBILITY  Roads Infrastructure Management  ...  POINT (18.60721 -33.92002)      1247.0  88ad361133fffff   -33.920536    18.607682
+4               NaN  2020-08-25 09:48:42+02:00  2020-08-31 08:41:13+02:00  URBAN MOBILITY  Roads Infrastructure Management  ...  POINT (18.45376 -33.98740)      2530.0  88ad361709fffff   -33.983538    18.451570
+
+[5 rows x 20 columns]
+2023-04-10 08:52:14 INFO Execution of get_location_centroid took 0.62 seconds.
+2023-04-10 08:57:29 INFO Execution of filter_sr_data_by_distance took 314.71 seconds.
+2023-04-10 08:57:29 INFO Filtred SR data based on distance to Bellville South centroid :      reference_number         creation_timestamp       completion_timestamp     directorate                       department  ... index_right            index centroid_lat centroid_lon dist_to_centroid
+6                 NaN  2020-10-23 10:33:48+02:00  2020-10-26 14:16:49+02:00  URBAN MOBILITY  Roads Infrastructure Management  ...       205.0  88ad361a19fffff   -33.919265    18.659265      1273.698558
+15       9.109617e+09  2020-10-27 11:36:55+02:00  2020-11-11 07:39:11+02:00  URBAN MOBILITY  Roads Infrastructure Management  ...      1241.0  88ad361125fffff   -33.923422    18.651148      1375.467548
+22       9.109558e+09  2020-10-16 14:41:42+02:00  2020-10-26 14:15:30+02:00  URBAN MOBILITY  Roads Infrastructure Management  ...      1242.0  88ad361127fffff   -33.919691    18.642069       535.080898
+77       9.109113e+09  2020-07-31 09:52:09+02:00  2020-08-10 11:47:25+02:00  URBAN MOBILITY  Roads Infrastructure Management  ...       274.0  88ad361ac9fffff   -33.915959    18.632992       954.502035
+112               NaN  2020-10-22 07:05:20+02:00  2020-10-26 14:16:49+02:00  URBAN MOBILITY  Roads Infrastructure Management  ...       276.0  88ad361acdfffff   -33.911802    18.641109       782.319394
+
+[5 rows x 21 columns]
+2023-04-10 08:57:51 INFO Execution of get_wind_data took 21.89 seconds.
+2023-04-10 08:57:51 INFO Execution of clean_wind_data took 0.10 seconds.
+2023-04-10 08:57:51 INFO Execution of merge_wind_data took 0.09 seconds.
+2023-04-10 08:57:51 INFO SR data with wind data :    reference_number        creation_timestamp       completion_timestamp           directorate  ... dist_to_centroid            timestamp_wind bellville_south_aqm_site_wind_dir_v_deg bellville_south_aqm_site_wind_speed_v_ms
+0      9.108191e+09 2019-12-31 23:49:58+00:00  2020-01-02 07:31:40+02:00  WATER AND SANITATION  ...      1081.954074 2020-01-01 00:00:00+00:00                                     191                                      2.5
+1      9.108191e+09 2020-01-01 00:19:27+00:00  2020-01-29 15:26:22+02:00  WATER AND SANITATION  ...       373.108186 2020-01-01 00:00:00+00:00                                     191                                      2.5
+2               NaN 2020-01-01 04:42:56+00:00  2020-01-02 07:34:55+02:00                ENERGY  ...       919.786173 2020-01-01 05:00:00+00:00                                     245                                      1.6
+3      9.108191e+09 2020-01-01 07:15:36+00:00  2020-01-02 09:17:51+02:00  WATER AND SANITATION  ...      1535.090190 2020-01-01 07:00:00+00:00                                   194.5                                      1.7
+4      9.108191e+09 2020-01-01 07:21:04+00:00  2020-01-16 14:20:21+02:00  WATER AND SANITATION  ...      1535.090190 2020-01-01 07:00:00+00:00                                   194.5                                      1.7
+
+[5 rows x 24 columns]
+2023-04-10 08:58:09 INFO Execution of anonymize_sr_data took 18.04 seconds.
+2023-04-10 08:58:09 INFO Anonymized SR data with location accuray of 500 meteres & temporal accuracy of 6 hours :                    reference_number        creation_timestamp      completion_timestamp           directorate  ... dist_to_centroid            timestamp_wind bellville_south_aqm_site_wind_dir_v_deg bellville_south_aqm_site_wind_speed_v_ms
+0  71122a031e134d67a66f7bb3405cf987 2019-12-31 18:00:00+00:00 2020-01-02 00:00:00+00:00  WATER AND SANITATION  ...      1081.954074 2020-01-01 00:00:00+00:00                                     191                                      2.5
+1  7347c2ba0fd04d52ab5a208960f5d6ea 2020-01-01 00:00:00+00:00 2020-01-29 12:00:00+00:00  WATER AND SANITATION  ...       373.108186 2020-01-01 00:00:00+00:00                                     191                                      2.5
+2  9ae6db1e9eed4e6da05835c81a597655 2020-01-01 00:00:00+00:00 2020-01-02 00:00:00+00:00                ENERGY  ...       919.786173 2020-01-01 00:00:00+00:00                                     245                                      1.6
+3  1fab19bcec464622beb6e3847d8ad779 2020-01-01 06:00:00+00:00 2020-01-02 06:00:00+00:00  WATER AND SANITATION  ...      1535.090190 2020-01-01 06:00:00+00:00                                   194.5                                      1.7
+4  5b49b208fd6d4b83bed4d86d506a553d 2020-01-01 06:00:00+00:00 2020-01-16 12:00:00+00:00  WATER AND SANITATION  ...      1535.090190 2020-01-01 06:00:00+00:00                                   194.5                                      1.7
+
+[5 rows x 24 columns]
+2023-04-10 08:58:09 INFO Execution of main took 389.73 seconds.
+2023-04-10 09:00:16 INFO Found credentials in environment variables.
+2023-04-10 09:00:16 INFO Extract H3 resolution 8 data from s3 bucket : cct-ds-code-challenge-input-data and filename : city-hex-polygons-8-10.geojson
+2023-04-10 09:00:22 INFO Execution of get_city_geojson took 6.06 seconds.
+2023-04-10 09:00:23 INFO Found credentials in environment variables.
+2023-04-10 09:00:23 INFO Found credentials in environment variables.
+2023-04-10 09:00:24 INFO H3 resolution 8 data from s3 : 
+           index  centroid_lat  centroid_lon  resolution                                                                                                                                               geometry
+88ad361801fffff    -33.859427     18.677843           8 POLYGON ((18.68119 -33.86330, 18.68357 -33.85928, 18.68023 -33.85541, 18.67450 -33.85555, 18.67211 -33.85957, 18.67546 -33.86345, 18.68119 -33.86330))
+88ad361803fffff    -33.855696     18.668766           8 POLYGON ((18.67211 -33.85957, 18.67450 -33.85555, 18.67115 -33.85168, 18.66542 -33.85182, 18.66304 -33.85584, 18.66638 -33.85972, 18.67211 -33.85957))
+88ad361805fffff    -33.855263     18.685959           8 POLYGON ((18.68931 -33.85914, 18.69169 -33.85512, 18.68834 -33.85124, 18.68261 -33.85139, 18.68023 -33.85541, 18.68357 -33.85928, 18.68931 -33.85914))
+88ad361807fffff    -33.851532     18.676881           8 POLYGON ((18.68023 -33.85541, 18.68261 -33.85139, 18.67927 -33.84751, 18.67353 -33.84766, 18.67115 -33.85168, 18.67450 -33.85555, 18.68023 -33.85541))
+88ad361809fffff    -33.867322     18.678806           8 POLYGON ((18.68215 -33.87120, 18.68454 -33.86718, 18.68119 -33.86330, 18.67546 -33.86345, 18.67307 -33.86747, 18.67642 -33.87134, 18.68215 -33.87120))
+2023-04-10 09:03:39 INFO Found credentials in environment variables.
+2023-04-10 09:03:39 INFO Extract H3 resolution 8 data from s3 bucket : cct-ds-code-challenge-input-data and filename : city-hex-polygons-8-10.geojson
+2023-04-10 09:03:41 INFO Execution of get_city_geojson took 2.36 seconds.
+2023-04-10 09:03:41 INFO Found credentials in environment variables.
+2023-04-10 09:03:41 INFO Found credentials in environment variables.
+2023-04-10 09:03:43 INFO H3 resolution 8 data from s3 : 
+           index  centroid_lat  centroid_lon  resolution                                                                                                                                               geometry
+88ad361801fffff    -33.859427     18.677843           8 POLYGON ((18.68119 -33.86330, 18.68357 -33.85928, 18.68023 -33.85541, 18.67450 -33.85555, 18.67211 -33.85957, 18.67546 -33.86345, 18.68119 -33.86330))
+88ad361803fffff    -33.855696     18.668766           8 POLYGON ((18.67211 -33.85957, 18.67450 -33.85555, 18.67115 -33.85168, 18.66542 -33.85182, 18.66304 -33.85584, 18.66638 -33.85972, 18.67211 -33.85957))
+88ad361805fffff    -33.855263     18.685959           8 POLYGON ((18.68931 -33.85914, 18.69169 -33.85512, 18.68834 -33.85124, 18.68261 -33.85139, 18.68023 -33.85541, 18.68357 -33.85928, 18.68931 -33.85914))
+88ad361807fffff    -33.851532     18.676881           8 POLYGON ((18.68023 -33.85541, 18.68261 -33.85139, 18.67927 -33.84751, 18.67353 -33.84766, 18.67115 -33.85168, 18.67450 -33.85555, 18.68023 -33.85541))
+88ad361809fffff    -33.867322     18.678806           8 POLYGON ((18.68215 -33.87120, 18.68454 -33.86718, 18.68119 -33.86330, 18.67546 -33.86345, 18.67307 -33.86747, 18.67642 -33.87134, 18.68215 -33.87120))
+2023-04-10 09:06:44 INFO Found credentials in environment variables.
+2023-04-10 09:06:44 INFO Extract H3 resolution 8 data from s3 bucket : cct-ds-code-challenge-input-data and filename : city-hex-polygons-8-10.geojson
+2023-04-10 09:06:45 INFO Execution of get_city_geojson took 1.50 seconds.
+2023-04-10 09:06:45 INFO Found credentials in environment variables.
+2023-04-10 09:06:45 INFO Found credentials in environment variables.
+2023-04-10 09:06:47 INFO H3 resolution 8 data from s3 : 
+           index  centroid_lat  centroid_lon  resolution                                                                                                                                               geometry
+88ad361801fffff    -33.859427     18.677843           8 POLYGON ((18.68119 -33.86330, 18.68357 -33.85928, 18.68023 -33.85541, 18.67450 -33.85555, 18.67211 -33.85957, 18.67546 -33.86345, 18.68119 -33.86330))
+88ad361803fffff    -33.855696     18.668766           8 POLYGON ((18.67211 -33.85957, 18.67450 -33.85555, 18.67115 -33.85168, 18.66542 -33.85182, 18.66304 -33.85584, 18.66638 -33.85972, 18.67211 -33.85957))
+88ad361805fffff    -33.855263     18.685959           8 POLYGON ((18.68931 -33.85914, 18.69169 -33.85512, 18.68834 -33.85124, 18.68261 -33.85139, 18.68023 -33.85541, 18.68357 -33.85928, 18.68931 -33.85914))
+88ad361807fffff    -33.851532     18.676881           8 POLYGON ((18.68023 -33.85541, 18.68261 -33.85139, 18.67927 -33.84751, 18.67353 -33.84766, 18.67115 -33.85168, 18.67450 -33.85555, 18.68023 -33.85541))
+88ad361809fffff    -33.867322     18.678806           8 POLYGON ((18.68215 -33.87120, 18.68454 -33.86718, 18.68119 -33.86330, 18.67546 -33.86345, 18.67307 -33.86747, 18.67642 -33.87134, 18.68215 -33.87120))
+2023-04-10 09:09:46 INFO Found credentials in environment variables.
+2023-04-10 09:09:46 INFO Extract H3 resolution 8 data from s3 bucket : cct-ds-code-challenge-input-data and filename : city-hex-polygons-8-10.geojson
+2023-04-10 09:09:48 INFO Execution of get_city_geojson took 1.83 seconds.
+2023-04-10 09:09:48 INFO Found credentials in environment variables.
+2023-04-10 09:09:48 INFO Found credentials in environment variables.
+2023-04-10 09:09:50 INFO H3 resolution 8 data from s3 : 
+           index  centroid_lat  centroid_lon  resolution                                                                                                                                               geometry
+88ad361801fffff    -33.859427     18.677843           8 POLYGON ((18.68119 -33.86330, 18.68357 -33.85928, 18.68023 -33.85541, 18.67450 -33.85555, 18.67211 -33.85957, 18.67546 -33.86345, 18.68119 -33.86330))
+88ad361803fffff    -33.855696     18.668766           8 POLYGON ((18.67211 -33.85957, 18.67450 -33.85555, 18.67115 -33.85168, 18.66542 -33.85182, 18.66304 -33.85584, 18.66638 -33.85972, 18.67211 -33.85957))
+88ad361805fffff    -33.855263     18.685959           8 POLYGON ((18.68931 -33.85914, 18.69169 -33.85512, 18.68834 -33.85124, 18.68261 -33.85139, 18.68023 -33.85541, 18.68357 -33.85928, 18.68931 -33.85914))
+88ad361807fffff    -33.851532     18.676881           8 POLYGON ((18.68023 -33.85541, 18.68261 -33.85139, 18.67927 -33.84751, 18.67353 -33.84766, 18.67115 -33.85168, 18.67450 -33.85555, 18.68023 -33.85541))
+88ad361809fffff    -33.867322     18.678806           8 POLYGON ((18.68215 -33.87120, 18.68454 -33.86718, 18.68119 -33.86330, 18.67546 -33.86345, 18.67307 -33.86747, 18.67642 -33.87134, 18.68215 -33.87120))
+2023-04-10 09:09:51 INFO Execution of get_city_geojson took 1.31 seconds.
+2023-04-10 09:09:51 INFO Found credentials in environment variables.
+2023-04-10 09:09:53 INFO Validation data from S3 :              index  centroid_lat  centroid_lon                                                                                                                                                geometry
+0  88ad361801fffff    -33.859427     18.677843  POLYGON ((18.68119 -33.86330, 18.68357 -33.85928, 18.68023 -33.85541, 18.67450 -33.85555, 18.67211 -33.85957, 18.67546 -33.86345, 18.68119 -33.86330))
+1  88ad361803fffff    -33.855696     18.668766  POLYGON ((18.67211 -33.85957, 18.67450 -33.85555, 18.67115 -33.85168, 18.66542 -33.85182, 18.66304 -33.85584, 18.66638 -33.85972, 18.67211 -33.85957))
+2  88ad361805fffff    -33.855263     18.685959  POLYGON ((18.68931 -33.85914, 18.69169 -33.85512, 18.68834 -33.85124, 18.68261 -33.85139, 18.68023 -33.85541, 18.68357 -33.85928, 18.68931 -33.85914))
+3  88ad361807fffff    -33.851532     18.676881  POLYGON ((18.68023 -33.85541, 18.68261 -33.85139, 18.67927 -33.84751, 18.67353 -33.84766, 18.67115 -33.85168, 18.67450 -33.85555, 18.68023 -33.85541))
+4  88ad361809fffff    -33.867322     18.678806  POLYGON ((18.68215 -33.87120, 18.68454 -33.86718, 18.68119 -33.86330, 18.67546 -33.86345, 18.67307 -33.86747, 18.67642 -33.87134, 18.68215 -33.87120))
+2023-04-10 09:09:53 INFO Data validation  for city polygons data PASSED. Extracted data == Validation data :  validation test : True
+2023-04-10 09:09:53 INFO Execution of validate_data_extract took 0.02 seconds.
+2023-04-10 09:10:03 INFO Execution of get_sr_data took 10.53 seconds.
+2023-04-10 09:10:22 INFO Failed to join 212367 of the sr data to H3 resolution level 8 hexagon data. This is a join error of 22.55%
+2023-04-10 09:10:22 INFO Execution of join_sr_to_gpd_data_extract took 18.79 seconds.
+2023-04-10 09:10:22 INFO Joined SR data with city polygons :    reference_number         creation_timestamp       completion_timestamp     directorate                       department  ...                    geometry index_right            index centroid_lat centroid_lon
+0      9.109492e+09  2020-10-07 06:55:18+02:00  2020-10-08 15:36:35+02:00  URBAN MOBILITY  Roads Infrastructure Management  ...  POINT (18.52249 -33.87284)      1047.0  88ad360225fffff   -33.871121    18.524125
+1      9.108995e+09  2020-07-09 16:08:13+02:00  2020-07-14 14:27:01+02:00  URBAN MOBILITY  Roads Infrastructure Management  ...  POINT (18.84894 -34.07892)      3055.0  88ad36d5e1fffff   -34.080426    18.851688
+2      9.109614e+09  2020-10-27 10:21:59+02:00  2020-10-28 17:48:15+02:00  URBAN MOBILITY  Roads Infrastructure Management  ...  POINT (18.82112 -34.10224)      2946.0  88ad36d437fffff   -34.104934    18.820143
+3      9.108601e+09  2020-03-19 06:36:06+02:00  2021-03-29 20:34:19+02:00  URBAN MOBILITY  Roads Infrastructure Management  ...  POINT (18.60721 -33.92002)      1247.0  88ad361133fffff   -33.920536    18.607682
+4               NaN  2020-08-25 09:48:42+02:00  2020-08-31 08:41:13+02:00  URBAN MOBILITY  Roads Infrastructure Management  ...  POINT (18.45376 -33.98740)      2530.0  88ad361709fffff   -33.983538    18.451570
+
+[5 rows x 20 columns]
+2023-04-10 09:10:23 INFO Execution of get_location_centroid took 0.55 seconds.
+2023-04-10 09:12:19 INFO Found credentials in environment variables.
+2023-04-10 09:12:19 INFO Extract H3 resolution 8 data from s3 bucket : cct-ds-code-challenge-input-data and filename : city-hex-polygons-8-10.geojson
+2023-04-10 09:12:21 INFO Execution of get_city_geojson took 2.02 seconds.
+2023-04-10 09:12:21 INFO Found credentials in environment variables.
+2023-04-10 09:12:21 INFO Found credentials in environment variables.
+2023-04-10 09:12:23 INFO H3 resolution 8 data from s3 : 
+           index  centroid_lat  centroid_lon  resolution                                                                                                                                               geometry
+88ad361801fffff    -33.859427     18.677843           8 POLYGON ((18.68119 -33.86330, 18.68357 -33.85928, 18.68023 -33.85541, 18.67450 -33.85555, 18.67211 -33.85957, 18.67546 -33.86345, 18.68119 -33.86330))
+88ad361803fffff    -33.855696     18.668766           8 POLYGON ((18.67211 -33.85957, 18.67450 -33.85555, 18.67115 -33.85168, 18.66542 -33.85182, 18.66304 -33.85584, 18.66638 -33.85972, 18.67211 -33.85957))
+88ad361805fffff    -33.855263     18.685959           8 POLYGON ((18.68931 -33.85914, 18.69169 -33.85512, 18.68834 -33.85124, 18.68261 -33.85139, 18.68023 -33.85541, 18.68357 -33.85928, 18.68931 -33.85914))
+88ad361807fffff    -33.851532     18.676881           8 POLYGON ((18.68023 -33.85541, 18.68261 -33.85139, 18.67927 -33.84751, 18.67353 -33.84766, 18.67115 -33.85168, 18.67450 -33.85555, 18.68023 -33.85541))
+88ad361809fffff    -33.867322     18.678806           8 POLYGON ((18.68215 -33.87120, 18.68454 -33.86718, 18.68119 -33.86330, 18.67546 -33.86345, 18.67307 -33.86747, 18.67642 -33.87134, 18.68215 -33.87120))
+2023-04-10 09:12:23 INFO Execution of get_city_geojson took 0.37 seconds.
+2023-04-10 09:12:23 INFO Found credentials in environment variables.
+2023-04-10 09:12:25 INFO Validation data from S3 :              index  centroid_lat  centroid_lon                                                                                                                                                geometry
+0  88ad361801fffff    -33.859427     18.677843  POLYGON ((18.68119 -33.86330, 18.68357 -33.85928, 18.68023 -33.85541, 18.67450 -33.85555, 18.67211 -33.85957, 18.67546 -33.86345, 18.68119 -33.86330))
+1  88ad361803fffff    -33.855696     18.668766  POLYGON ((18.67211 -33.85957, 18.67450 -33.85555, 18.67115 -33.85168, 18.66542 -33.85182, 18.66304 -33.85584, 18.66638 -33.85972, 18.67211 -33.85957))
+2  88ad361805fffff    -33.855263     18.685959  POLYGON ((18.68931 -33.85914, 18.69169 -33.85512, 18.68834 -33.85124, 18.68261 -33.85139, 18.68023 -33.85541, 18.68357 -33.85928, 18.68931 -33.85914))
+3  88ad361807fffff    -33.851532     18.676881  POLYGON ((18.68023 -33.85541, 18.68261 -33.85139, 18.67927 -33.84751, 18.67353 -33.84766, 18.67115 -33.85168, 18.67450 -33.85555, 18.68023 -33.85541))
+4  88ad361809fffff    -33.867322     18.678806  POLYGON ((18.68215 -33.87120, 18.68454 -33.86718, 18.68119 -33.86330, 18.67546 -33.86345, 18.67307 -33.86747, 18.67642 -33.87134, 18.68215 -33.87120))
+2023-04-10 09:12:25 INFO Data validation  for city polygons data PASSED. Extracted data == Validation data :  validation test : True
+2023-04-10 09:12:25 INFO Execution of validate_data_extract took 0.03 seconds.
+2023-04-10 09:13:04 INFO Found credentials in environment variables.
+2023-04-10 09:13:04 INFO Extract H3 resolution 8 data from s3 bucket : cct-ds-code-challenge-input-data and filename : city-hex-polygons-8-10.geojson
+2023-04-10 09:13:06 INFO Execution of get_city_geojson took 1.50 seconds.
+2023-04-10 09:13:06 INFO Found credentials in environment variables.
+2023-04-10 09:13:06 INFO Found credentials in environment variables.
+2023-04-10 09:14:53 INFO Found credentials in environment variables.
+2023-04-10 09:14:53 INFO Extract H3 resolution 8 data from s3 bucket : cct-ds-code-challenge-input-data and filename : city-hex-polygons-8-10.geojson
+2023-04-10 09:14:54 INFO Execution of get_city_geojson took 1.49 seconds.
+2023-04-10 09:14:54 INFO Found credentials in environment variables.
+2023-04-10 09:14:54 INFO Found credentials in environment variables.
+2023-04-10 09:14:56 INFO Extract H3 Validation data from S3 : cct-ds-code-challenge-input-data and filename : city-hex-polygons-8.geojson
+2023-04-10 09:14:57 INFO Execution of get_city_geojson took 0.66 seconds.
+2023-04-10 09:14:57 INFO Found credentials in environment variables.
+2023-04-10 09:17:38 INFO Found credentials in environment variables.
+2023-04-10 09:17:38 INFO Extract H3 resolution 8 data from s3 bucket : cct-ds-code-challenge-input-data and filename : city-hex-polygons-8-10.geojson
+2023-04-10 09:17:40 INFO Execution of get_city_geojson took 2.29 seconds.
+2023-04-10 09:17:41 INFO Found credentials in environment variables.
+2023-04-10 09:17:41 INFO Found credentials in environment variables.
+2023-04-10 09:17:42 INFO Extract H3 Validation data from S3 : cct-ds-code-challenge-input-data and filename : city-hex-polygons-8.geojson
+2023-04-10 09:17:43 INFO Execution of get_city_geojson took 0.35 seconds.
+2023-04-10 09:17:43 INFO Found credentials in environment variables.
+2023-04-10 09:17:44 INFO Validating H3 resolution 8 data...
+2023-04-10 09:17:44 INFO Data validation  for city polygons data PASSED. Extracted data == Validation data :  validation test : True
+2023-04-10 09:17:44 INFO Execution of validate_data_extract took 0.02 seconds.
+2023-04-10 09:28:00 INFO Found credentials in environment variables.
+2023-04-10 09:28:00 INFO Extract H3 resolution 8 data from s3 bucket : cct-ds-code-challenge-input-data and filename : city-hex-polygons-8-10.geojson
+2023-04-10 09:28:02 INFO Execution of get_city_geojson took 2.02 seconds.
+2023-04-10 09:28:02 INFO Found credentials in environment variables.
+2023-04-10 09:28:02 INFO Found credentials in environment variables.
+2023-04-10 09:28:04 INFO Extract H3 Validation data from S3 : cct-ds-code-challenge-input-data and filename : city-hex-polygons-8.geojson
+2023-04-10 09:28:04 INFO Execution of get_city_geojson took 0.31 seconds.
+2023-04-10 09:28:04 INFO Found credentials in environment variables.
+2023-04-10 09:28:06 INFO Validating H3 resolution 8 data...
+2023-04-10 09:28:06 INFO Data validation  for city polygons data PASSED. Extracted data == Validation data :  validation test : True
+2023-04-10 09:28:06 INFO Execution of validate_data_extract took 0.03 seconds.
+2023-04-10 09:28:06 INFO Fetch Service Request Data & Join to City Polygons data..
+2023-04-10 09:28:15 INFO Execution of get_sr_data took 9.52 seconds.
+2023-04-10 09:28:35 INFO Failed to join 212367 of the sr data to H3 resolution level 8 hexagon data. This is a join error of 22.55%
+2023-04-10 09:28:35 INFO Execution of join_sr_to_gpd_data_extract took 19.48 seconds.
+2023-04-10 09:28:35 INFO Complete : Joined SR data with city polygons
+2023-04-10 09:28:35 INFO Creating a subsample of service requests that are within 1 minute of Bellville South..
+2023-04-10 09:28:36 INFO Execution of get_location_centroid took 0.54 seconds.
+2023-04-10 09:33:26 INFO Execution of filter_sr_data_by_distance took 290.51 seconds.
+2023-04-10 09:33:26 INFO Complete : Create a subsample of service requests that are within 1 minute of Bellville South
+2023-04-10 09:33:26 INFO  Adding Wind data to subsample..
+2023-04-10 09:33:46 INFO Execution of get_wind_data took 20.25 seconds.
+2023-04-10 09:33:46 INFO Execution of clean_wind_data took 0.11 seconds.
+2023-04-10 09:33:47 INFO Execution of merge_wind_data took 0.08 seconds.
+2023-04-10 09:33:47 INFO Complete : Add Wind data to subsample
+2023-04-10 09:33:47 INFO Anonymizing SR data...
+2023-04-10 09:34:04 INFO Execution of anonymize_sr_data took 17.05 seconds.
+2023-04-10 09:34:04 INFO Complete : Anonymize SR data
+2023-04-10 09:34:04 INFO Execution of main took 364.14 seconds.
+2023-04-10 09:42:31 INFO Found credentials in environment variables.
+2023-04-10 09:42:31 INFO Extract H3 resolution 8 data from s3 bucket : cct-ds-code-challenge-input-data and filename : city-hex-polygons-8-10.geojson
+2023-04-10 09:42:34 INFO Execution of get_city_geojson took 2.41 seconds.
+2023-04-10 09:42:34 INFO Found credentials in environment variables.
+2023-04-10 09:42:34 INFO Found credentials in environment variables.
+2023-04-10 09:47:39 INFO Found credentials in environment variables.
+2023-04-10 09:47:39 INFO Extract H3 resolution 8 data from s3 bucket : cct-ds-code-challenge-input-data and filename : city-hex-polygons-8-10.geojson
+2023-04-10 09:47:41 INFO Execution of get_city_geojson took 2.15 seconds.
+2023-04-10 09:47:41 INFO Found credentials in environment variables.
+2023-04-10 09:47:41 INFO Found credentials in environment variables.
+2023-04-10 09:47:42 INFO Extract H3 Validation data from S3 : cct-ds-code-challenge-input-data and filename : city-hex-polygons-8.geojson
+2023-04-10 09:47:43 INFO Execution of get_city_geojson took 0.59 seconds.
+2023-04-10 09:47:43 INFO Found credentials in environment variables.
+2023-04-10 09:48:07 INFO Found credentials in environment variables.
+2023-04-10 09:48:08 INFO Extract H3 resolution 8 data from s3 bucket : cct-ds-code-challenge-input-data and filename : city-hex-polygons-8-10.geojson
+2023-04-10 09:48:12 INFO Execution of get_city_geojson took 4.10 seconds.
+2023-04-10 09:48:12 INFO Found credentials in environment variables.
+2023-04-10 09:48:12 INFO Found credentials in environment variables.
+2023-04-10 09:48:13 INFO Extract H3 Validation data from S3 : cct-ds-code-challenge-input-data and filename : city-hex-polygons-8.geojson
+2023-04-10 09:48:15 INFO Execution of get_city_geojson took 1.37 seconds.
+2023-04-10 09:48:15 INFO Found credentials in environment variables.
+2023-04-10 09:48:16 INFO Validating H3 resolution 8 data...
+2023-04-10 09:48:16 INFO Data validation  for city polygons data PASSED. Extracted data == Validation data :  validation test : True
+2023-04-10 09:48:16 INFO Execution of validate_data_extract took 0.02 seconds.
+2023-04-10 09:48:16 INFO Fetch Service Request Data & Join to City Polygons data..
+2023-04-10 09:48:31 INFO Execution of get_sr_data took 14.40 seconds.
+2023-04-10 09:48:49 INFO Failed to join 212367 of the sr data to H3 resolution level 8 hexagon data. This is a join error of 22.55%
+2023-04-10 09:48:49 INFO Execution of join_sr_to_gpd_data_extract took 18.40 seconds.
+2023-04-10 09:48:49 INFO Complete : Joined SR data with city polygons
+2023-04-10 09:48:49 INFO Creating a subsample of service requests that are within 1 minute of Bellville South..
+2023-04-10 09:48:50 INFO Execution of get_location_centroid took 0.56 seconds.
+2023-04-10 09:54:13 INFO Execution of filter_sr_data_by_distance took 323.29 seconds.
+2023-04-10 09:54:13 INFO Complete : Create a subsample of service requests that are within 1 minute of Bellville South
+2023-04-10 09:54:13 INFO  Adding Wind data to subsample..
+2023-04-10 09:55:29 INFO Found credentials in environment variables.
+2023-04-10 09:55:30 INFO Extract H3 resolution 8 data from s3 bucket : cct-ds-code-challenge-input-data and filename : city-hex-polygons-8-10.geojson
+2023-04-10 09:55:32 INFO Execution of get_city_geojson took 2.08 seconds.
+2023-04-10 09:55:32 INFO Found credentials in environment variables.
+2023-04-10 09:55:32 INFO Found credentials in environment variables.
+2023-04-10 09:55:33 INFO Extract H3 Validation data from S3 : cct-ds-code-challenge-input-data and filename : city-hex-polygons-8.geojson
+2023-04-10 09:55:35 INFO Execution of get_city_geojson took 1.94 seconds.
+2023-04-10 09:55:35 INFO Found credentials in environment variables.
+2023-04-10 09:55:37 INFO Validating H3 resolution 8 data...
+2023-04-10 09:55:37 INFO Data validation  for city polygons data PASSED. Extracted data == Validation data :  validation test : True
+2023-04-10 09:55:37 INFO Execution of validate_data_extract took 0.03 seconds.
+2023-04-10 09:55:37 INFO Fetch Service Request Data & Join to City Polygons data..
+2023-04-10 09:55:48 INFO Execution of get_sr_data took 11.51 seconds.
+2023-04-10 09:56:07 INFO Failed to join 212367 of the sr data to H3 resolution level 8 hexagon data. This is a join error of 22.55%
+2023-04-10 09:56:07 INFO Execution of join_sr_to_gpd_data_extract took 18.78 seconds.
+2023-04-10 09:56:07 INFO Complete : Joined SR data with city polygons
+2023-04-10 09:56:07 INFO Creating a subsample of service requests that are within 1 minute of Bellville South..
+2023-04-10 09:56:08 INFO Execution of get_location_centroid took 0.67 seconds.
+2023-04-10 10:01:17 INFO Execution of filter_sr_data_by_distance took 309.22 seconds.
+2023-04-10 10:01:17 INFO Complete : Create a subsample of service requests that are within 1 minute of Bellville South
+2023-04-10 10:01:17 INFO  Adding Wind data to subsample..
+2023-04-10 10:01:38 INFO Execution of get_wind_data took 20.55 seconds.
+2023-04-10 10:01:38 INFO Execution of clean_wind_data took 0.10 seconds.
+2023-04-10 10:01:38 INFO Execution of merge_wind_data took 0.07 seconds.
+2023-04-10 10:01:38 INFO Complete : Add Wind data to subsample
+2023-04-10 10:01:38 INFO Anonymizing SR data...
+2023-04-10 10:01:56 INFO Execution of anonymize_sr_data took 17.88 seconds.
+2023-04-10 10:01:56 INFO Complete : Anonymize SR data
+2023-04-10 10:01:56 INFO Execution of main took 387.13 seconds.

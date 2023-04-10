@@ -179,6 +179,7 @@ def anonymize_sr_data(df, lat_col, lon_col, location_accuracy=500, temporal_accu
 
     """
 
+    # Annonymize location data
     n = len(df)
     lat = df[lat_col].values
     lon = df[lon_col].values
@@ -205,6 +206,7 @@ def anonymize_sr_data(df, lat_col, lon_col, location_accuracy=500, temporal_accu
     df[lat_col] = new_lat
     df[lon_col] = new_lon
 
+    # Anonymize timestamp data
     period = pd.Timedelta(hours=temporal_accuracy)
     df['creation_timestamp'] = pd.to_datetime(
         df['creation_timestamp'], format='%Y-%m-%d %H:%M:%S%z', utc=True)
@@ -217,4 +219,9 @@ def anonymize_sr_data(df, lat_col, lon_col, location_accuracy=500, temporal_accu
     df['timestamp_wind'] = df['timestamp_wind'].dt.floor(period)
     df['reference_number'] = df['reference_number'].apply(generate_uuid)
 
-    return df
+    # Return only a subset of the data
+    columns_subset = ['reference_number', 'reference_number', 'creation_timestamp', 'completion_timestamp', 'directorate', 'department', 'branch', 'section', 'code_group', 'code',
+                      'cause_code_group', 'cause_code', 'official_suburb', 'latitude', 'longitude', 'index', 'timestamp_wind', 'bellville_south_aqm_site_wind_dir_v_deg', 'bellville_south_aqm_site_wind_speed_v_ms']
+    df_subset = df[columns_subset]
+
+    return df_subset
