@@ -9,10 +9,10 @@ from geopy.distance import distance
 from geopy.geocoders import Nominatim
 from pathlib import Path
 from src.utils.constants import BUCKET_NAME, H3_POLYGONS_LVL_8_9_10, H3_POLYGONS_LVL_8, SERVICE_REQUEST_DATA, WIND_DATA
-from src.utils.extract_data import get_city_geojson, get_sr_data
+from src.utils.extract_data import get_city_geojson, get_sr_data, get_wind_data
 from src.utils.validation import validate_data_extract
 from src.utils.helper_functions import get_location_centroid
-from src.utils.transformations import join_sr_to_gpd_data_extract, filter_sr_data_by_distance, get_wind_data, clean_wind_data, merge_wind_data
+from src.utils.transformations import join_sr_to_gpd_data_extract, filter_sr_data_by_distance, clean_wind_data, merge_wind_data
 from src.utils.helper_functions import benchmark
 
 

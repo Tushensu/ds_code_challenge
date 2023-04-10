@@ -88,25 +88,6 @@ def filter_sr_data_by_distance(sr_data, location_cetroid):
 
 
 @benchmark
-def get_wind_data(url):
-    """
-    This function downloads wind data from a url where the wind data is stored as an excel file
-
-    Input Parameters
-    ----------------
-    url : str (the url that contains wind data in excel format)
-
-    Output
-    ------
-    df : pandas.DataFrame object
-    """
-
-    df = pd.read_excel(url, skiprows=2,  header=[0, 1, 2])
-
-    return df
-
-
-@benchmark
 def clean_wind_data(df):
     """
     This function takes in an unprocessed pandas dataframe of wind data and return a cleaned version that is specific to a suburb

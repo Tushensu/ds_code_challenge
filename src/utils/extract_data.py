@@ -77,3 +77,22 @@ def get_sr_data(bucket_name, object_key, s3_client):
                      index_col=0).reset_index(drop=True)
 
     return df
+
+
+@benchmark
+def get_wind_data(url):
+    """
+    This function downloads wind data from a url where the wind data is stored as an excel file
+
+    Input Parameters
+    ----------------
+    url : str (the url that contains wind data in excel format)
+
+    Output
+    ------
+    df : pandas.DataFrame object
+    """
+
+    df = pd.read_excel(url, skiprows=2,  header=[0, 1, 2])
+
+    return df
