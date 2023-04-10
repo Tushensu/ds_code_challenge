@@ -37,7 +37,7 @@ cd ds_code_challenge
 Install package dependencies into your virtual environment by executing the following python pip command
 
 ```bash
-python3 pip install -r requirements.txt # This will install all the python libraries requrired to run the program
+pip install -r requirements.txt # This will install all the python libraries requrired to run the program
 
 ```
 
