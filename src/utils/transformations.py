@@ -2,6 +2,7 @@ import logging
 from src.utils.helper_functions import benchmark
 import logging
 import geopandas as gpd
+import pandas as pd
 from shapely.geometry import Point
 from geopy.distance import distance
 
@@ -73,8 +74,6 @@ def filter_sr_data_by_distance(sr_data, location_cetroid):
     # Create a new column in the dataframe to store the distance from each point to the centroid
     sr_data['dist_to_centroid'] = sr_data.geometry.apply(dist_to_centroid)
 
-    print("Here?")
-
     # Calculate the distance of 1 minute of latitude/longitude at the centroid's latitude
     lat_dist_per_min = distance(
         (location_cetroid.y, location_cetroid.x), (location_cetroid.y + 1, location_cetroid.x)).meters / 60
@@ -86,3 +85,90 @@ def filter_sr_data_by_distance(sr_data, location_cetroid):
     df_within_1_min = sr_data[sr_data.dist_to_centroid <= buffer_dist]
 
     return df_within_1_min
+
+
+@benchmark
+def get_wind_data(url):
+    """
+    This function downloads wind data from a url where the wind data is stored as an excel file
+
+    Input Parameters
+    ----------------
+    url : str (the url that contains wind data in excel format)
+
+    Output
+    ------
+    df : pandas.DataFrame object
+    """
+
+    df = pd.read_excel(url, skiprows=2,  header=[0, 1, 2])
+
+    return df
+
+
+@benchmark
+def clean_wind_data(df):
+    """
+    This function takes in an unprocessed pandas dataframe of wind data and return a cleaned version that is specific to a suburb
+
+
+    Input Parameters
+    ----------------
+    df : Pandas.DataFrame
+
+
+    Output
+    ------
+    df : Pandas.DataFrame
+    """
+    df.columns = [
+        "  ".join(c).strip() if "Date" not in c[0] else c[0] for c in df.columns
+    ]
+
+    df = df.rename(columns={'Date & Time': 'timestamp_wind'})
+    df.columns = df.columns.str.replace(' ', '_')
+    df.columns = df.columns.str.replace('__', '_')
+    df.columns = df.columns.str.replace('m/s', 'Ms')
+    df.columns = df.columns.str.lower()
+    df = df.iloc[:-8]
+    f = df.replace("NoData", None)
+    df['timestamp_wind'] = pd.to_datetime(
+        df['timestamp_wind'], format='%d/%m/%Y %H:%M', utc=True)
+
+    if df.duplicated().sum() > 0:
+        df = df.drop_duplicates()
+
+    return df
+
+
+@benchmark
+def merge_wind_data(sr_df, wind_df, suburb):
+    """
+    This function auguments the filtered subsample of sr_data with the appropriate wind direction and speed data for 2020 for a specific suburb available in the wind data from 
+    the Air Quality Measurement site.
+
+    Input Parameters
+    ----------------
+    sr_df : Pandas.DataFrame
+    wind_df : Pandas.DataFrame
+    suburb : str
+
+
+    Output
+    ------
+    merged_df : Pandas.DataFrame
+
+
+    """
+
+    filtred_wind_df = wind_df.filter(regex=f'^timestamp|^{suburb}')
+
+    sr_df = sr_df.sort_values('creation_timestamp')
+    sr_df['creation_timestamp'] = pd.to_datetime(
+        sr_df['creation_timestamp'], format='%Y-%m-%d %H:%M:%S%z', utc=True)
+    wind_df = filtred_wind_df.sort_values('timestamp_wind')
+
+    merged_df = pd.merge_asof(
+        sr_df, wind_df, left_on='creation_timestamp', right_on='timestamp_wind', direction='nearest')
+
+    return merged_df
