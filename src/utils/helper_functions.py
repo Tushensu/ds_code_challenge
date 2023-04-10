@@ -1,7 +1,9 @@
-from time import perf_counter
 import logging
+import uuid
+from time import perf_counter
 from geopy.geocoders import Nominatim
 from shapely.geometry import Point
+from math import radians, sin, cos, sqrt, atan2
 
 
 def benchmark(func: callable(...)):
@@ -54,3 +56,47 @@ def get_location_centroid(location):
         location_geocode.longitude, location_geocode.latitude)
 
     return location_centroid
+
+
+def generate_uuid(val):
+    """
+    This function generates a random uuid for a given value.
+
+    Input Parameters
+    ----------------
+    val
+
+
+    Output
+    ------
+    uuid : str 
+    """
+
+    return uuid.uuid4().hex
+
+
+def calculate_distance(lat1, lon1, lat2, lon2):
+    """
+    This function calculates the distance between two points given their latitude and longitude.
+
+    Input Parameters
+    ----------------
+    lat1 : float
+    lat2 : float
+    lon1 : float
+    lon2 : float
+
+    Output
+    -----
+    distance : float
+
+    """
+
+    R = 6371
+    lat1, lon1, lat2, lon2 = map(radians, [lat1, lon1, lat2, lon2])
+    dlat = lat2 - lat1
+    dlon = lon2 - lon1
+    a = sin(dlat / 2) ** 2 + cos(lat1) * cos(lat2) * sin(dlon / 2) ** 2
+    c = 2 * atan2(sqrt(a), sqrt(1 - a))
+
+    return R * c * 1000

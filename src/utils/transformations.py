@@ -1,10 +1,12 @@
 import logging
-from src.utils.helper_functions import benchmark
 import logging
 import geopandas as gpd
 import pandas as pd
+import numpy as np
 from shapely.geometry import Point
 from geopy.distance import distance
+from src.utils.helper_functions import calculate_distance, generate_uuid
+from src.utils.helper_functions import benchmark
 
 
 @benchmark
@@ -153,3 +155,66 @@ def merge_wind_data(sr_df, wind_df, suburb):
         sr_df, wind_df, left_on='creation_timestamp', right_on='timestamp_wind', direction='nearest')
 
     return merged_df
+
+
+@benchmark
+def anonymize_sr_data(df, lat_col, lon_col, location_accuracy=500, temporal_accuracy=6):
+    """
+    This function anonymises the filtered subsample of sr_data preserves the following precisions :
+    - location accuracy to within approximately 500m
+    - temporal accuracy to within 6 hours
+
+    Input Parameters
+    ----------------
+    df : Pandas.DataFrame
+    lat_col : str
+    lon_col : str
+    location_accuracy : int
+    temporal_accuracy : int
+
+    Output
+    ------
+    df : Pandas.Dataframe (the anonymized result set)
+
+
+    """
+
+    n = len(df)
+    lat = df[lat_col].values
+    lon = df[lon_col].values
+    new_lat = np.zeros(n)
+    new_lon = np.zeros(n)
+    for i in range(n):
+        # Generate a random displacement within the specified accuracy
+        displacement = np.random.uniform(0, location_accuracy)
+        bearing = np.random.uniform(0, 360)
+        lat1, lon1 = lat[i], lon[i]
+        lat2 = lat1 + (displacement / 1000) * np.sin(np.deg2rad(bearing))
+        lon2 = lon1 + (displacement / 1000) * \
+            np.cos(np.deg2rad(bearing)) / np.cos(np.deg2rad(lat1))
+
+        # Check if the new location is within the specified accuracy
+        while calculate_distance(lat1, lon1, lat2, lon2) > location_accuracy:
+            displacement = np.random.uniform(0, location_accuracy)
+            bearing = np.random.uniform(0, 360)
+            lat2 = lat1 + (displacement / 1000) * np.sin(np.deg2rad(bearing))
+            lon2 = lon1 + (displacement / 1000) * \
+                np.cos(np.deg2rad(bearing)) / np.cos(np.deg2rad(lat1))
+        new_lat[i] = lat2
+        new_lon[i] = lon2
+    df[lat_col] = new_lat
+    df[lon_col] = new_lon
+
+    period = pd.Timedelta(hours=temporal_accuracy)
+    df['creation_timestamp'] = pd.to_datetime(
+        df['creation_timestamp'], format='%Y-%m-%d %H:%M:%S%z', utc=True)
+    df['creation_timestamp'] = df['creation_timestamp'].dt.floor(period)
+
+    df['completion_timestamp'] = pd.to_datetime(
+        df['completion_timestamp'], format='%Y-%m-%d %H:%M:%S%z', utc=True)
+    df['completion_timestamp'] = df['completion_timestamp'].dt.floor(period)
+
+    df['timestamp_wind'] = df['timestamp_wind'].dt.floor(period)
+    df['reference_number'] = df['reference_number'].apply(generate_uuid)
+
+    return df
